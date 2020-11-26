@@ -8,7 +8,7 @@ namespace lib
         static public Character Ch_testValue(){
             Character ch = new Character();
             ch.Ch_No = "1";
-            ch.Ch_Nm = "Doncky";
+            ch.Ch_Nm = "Jason";
             ch.Lv = "1";
             ch.EXP = "0";
             ch.HP = "100";

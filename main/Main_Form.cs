@@ -26,7 +26,20 @@ namespace main
         {
             Character ch = test.Ch_testValue();
             Monster mns = test.Mns_testValue();
-            string result = Battle.StartFight(ch, mns);
+            List<Monster> MnsList = new List<Monster>();
+            MnsList.Add(mns);
+            BattleReport btrpt = new BattleReport(){
+                Ch_Dtl = ch,
+                Mns_Dtl = MnsList,
+                message = new List<string>()
+            };
+            //string result = Battle.StartFight(ch, mns);
+            string result = Battle.StartFight(ref btrpt);
+            foreach(string meg in btrpt.message){
+                output.AppendText(meg);
+                Thread.Sleep(400);
+                output.AppendText(Environment.NewLine);
+            }
             output.AppendText(result);
             output.AppendText(Environment.NewLine);
             
