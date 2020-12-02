@@ -24,7 +24,7 @@ namespace main
         }
         private void button1_Click(object sender, System.EventArgs e)
         {
-            Character ch = test.Ch_testValue();
+            Character ch = Ch_Sts.get();
             Monster mns = test.Mns_testValue();
             List<Monster> MnsList = new List<Monster>();
             MnsList.Add(mns);

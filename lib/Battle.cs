@@ -11,7 +11,7 @@ namespace lib
         // Issues - store data only to first monster
         //
         public static string StartFight(ref BattleReport btrpt){
-            int mns_ASPD = 0;
+            int mns_ASPD = 0, single = 0;
             List<string> attmeg = btrpt.message;
             foreach(var i in btrpt.Mns_Dtl){
                 if(mns_ASPD < i.ASPD){
@@ -20,20 +20,26 @@ namespace lib
             }
 
             if(btrpt.Ch_Dtl.ASPD >= mns_ASPD){
-                while(Int32.Parse(btrpt.Ch_Dtl.HP) > 0){
+                while(Int32.Parse(btrpt.Ch_Dtl.HP) > 0 && single == 0){
                     btrpt.Mns_Dtl[0] = ChAttMns(btrpt.Ch_Dtl, btrpt.Mns_Dtl[0], ref attmeg);
                     foreach(var mns in btrpt.Mns_Dtl){
                         //btrpt.Ch_Dtl = MnsAttCh(btrpt.Mns_Dtl[0], btrpt.Ch_Dtl, ref attmeg);
-                        if(Int32.Parse(mns.HP)<=0){break;};
+                        if(Int32.Parse(mns.HP)<=0){
+                            single = 1;
+                            break;
+                        };
                         btrpt.Ch_Dtl = MnsAttCh(mns, btrpt.Ch_Dtl, ref attmeg);
                     }
                 }
             }else{
-                while(Int32.Parse(btrpt.Ch_Dtl.HP) > 0){
+                while(Int32.Parse(btrpt.Ch_Dtl.HP) > 0 && single == 0){
                     btrpt.Ch_Dtl = MnsAttCh(btrpt.Mns_Dtl[0], btrpt.Ch_Dtl, ref attmeg);
                     foreach(var mns in btrpt.Mns_Dtl){
                         btrpt.Mns_Dtl[0] = ChAttMns(btrpt.Ch_Dtl, btrpt.Mns_Dtl[0], ref attmeg);
-                        if(Int32.Parse(mns.HP)<=0){break;};
+                        if(Int32.Parse(mns.HP)<=0){
+                            single = 1;
+                            break;
+                        };
                     }
                 }
             }

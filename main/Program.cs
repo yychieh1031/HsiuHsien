@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +16,16 @@ namespace main
         [STAThread]
         static void Main()
         {
-            lib.TableCreate.Ch_Dtl_Table();
-            lib.TableCreate.Mns_Dtl_Table();
-            lib.TableCreate.Exp_Dtl_Table();
+            lib.Ch_Sts.get();
+            // Initial Setting ex. Create DB and Insert data
+            string dir = ConfigurationManager.AppSettings["dir"];
+            dir += "/HsiuHsien_MainDB.db";
+            if(!File.Exists(dir)){
+                lib.TableCreate.Ch_Dtl_Table();
+                lib.TableCreate.Mns_Dtl_Table();
+                lib.TableCreate.Exp_Dtl_Table();
+                lib.ExpData.post();
+            }
             // Application Run
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
