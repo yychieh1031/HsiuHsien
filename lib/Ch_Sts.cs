@@ -9,11 +9,12 @@ namespace lib
         public static Character get(){
             Character ch = new Character();
             var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
-            using(connection){
+            using(connection)
+            {
                 connection.DefaultTimeout = 60;
                 connection.Open();
                 var selectCmd = connection.CreateCommand();
-                selectCmd.CommandText = "SELECT * FROM Ch_Dtl";
+                selectCmd.CommandText = @"SELECT * FROM Ch_Dtl";
                 
                 using (var reader = selectCmd.ExecuteReader())
                 {
@@ -41,6 +42,49 @@ namespace lib
                 }
             }
             return ch;
+        }
+        public static void post()
+        {
+            //Character ch = new Character();
+            var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
+            using(connection)
+            {
+                connection.DefaultTimeout = 60;
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                var insertCmd = connection.CreateCommand();
+                insertCmd.CommandText = String.Format(
+                    @"INSERT INTO Ch_Dtl (
+                        Ch_No, Ch_Nm, Lv, EXP, 
+                        HP, MP, ATK, MATK,
+                        Critical, DEF, MDEF,
+                        STR, INT, VIT, AGI,
+                        DEX, LUK, ASPD
+                        )VALUES(
+                        '{0}', '{1}', '{2}', '{3}', 
+                        '{4}', '{5}', '{6}', '{7}', 
+                        '{8}', '{9}', '{10}', 
+                        '{11}', '{12}', '{13}', '{14}', 
+                        '{15}', '{16}', '{17}')",
+
+                        "1", "Jason", "1", "0",
+                        "100", "100", 10, 1,
+                        5, 1, 1,
+                        1, 1, 1, 1,
+                        1, 1, 1);
+
+                    insertCmd.ExecuteNonQuery();
+
+                    try{
+                        transaction.Commit();
+                    }
+                    catch(Exception ex){
+                        //Console.WriteLine("{0}", ex.ToString());
+                    }  
+                }
+            }
+
         }
     }
 }

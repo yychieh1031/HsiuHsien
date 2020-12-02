@@ -30,7 +30,7 @@ namespace main
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.Lv = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -85,10 +85,10 @@ namespace main
             // 
             // textBox2
             // 
-            this.Lv.Location = new System.Drawing.Point(60, 40);
-            this.Lv.Name = "Lv";
-            this.Lv.Size = new System.Drawing.Size(100, 22);
-            this.Lv.TabIndex = 1;
+            this.textBox2.Location = new System.Drawing.Point(60, 40);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
+            this.textBox2.TabIndex = 1;
             // 
             // textBox3
             // 
@@ -499,7 +499,7 @@ namespace main
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.Lv);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Text = "Main_Form";
         }
@@ -508,7 +508,7 @@ namespace main
         
         #region Declare Action Tools
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox Lv;
+        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
