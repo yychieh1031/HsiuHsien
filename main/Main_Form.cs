@@ -15,16 +15,16 @@ namespace main
 {
     public partial class Main_Form : Form
     {
+        
+        public static Character ch = Ch_Sts.get();
         BattleReport btrpt = new BattleReport(){
-            Ch_Dtl = new Character(),
+            Ch_Dtl = ch,
             Mns_Dtl = new List<Monster>(),
             message = new List<string>()
         };
         public Main_Form()
         {
             InitializeComponent();
-            Character ch = test.Ch_testValue();
-            Monster mns = test.Mns_testValue();
             UIDisplay(ch);
         }
         private void button1_Click(object sender, System.EventArgs e)
@@ -48,28 +48,28 @@ namespace main
             }
             output.AppendText(result);
             output.AppendText(Environment.NewLine);
-            
+            UIDisplay(btrpt.Ch_Dtl);
         }
 
-        private void UIDisplay(Character ch)
+        private void UIDisplay(Character chDis)
         {
-            textBox1.Text = ch.Ch_Nm;
-            textBox2.Text = ch.Lv;
-            textBox3.Text = ch.EXP;
-            textBox4.Text = ch.HP;
-            textBox5.Text = ch.MP;
-            textBox6.Text = ch.ATK.ToString();
-            textBox7.Text = ch.MATK.ToString();
-            textBox8.Text = ch.Critical.ToString();
-            textBox9.Text = ch.DEF.ToString();
-            textBox10.Text = ch.MDEF.ToString();
-            textBox11.Text = ch.STR.ToString();
-            textBox12.Text = ch.INT.ToString();
-            textBox13.Text = ch.VIT.ToString();
-            textBox14.Text = ch.AGI.ToString();
-            textBox15.Text = ch.DEX.ToString();
-            textBox16.Text = ch.LUK.ToString();
-            textBox17.Text = ch.ASPD.ToString();
+            textBox1.Text = chDis.Ch_Nm;
+            textBox2.Text = chDis.Lv;
+            textBox3.Text = chDis.EXP;
+            textBox4.Text = chDis.HP;
+            textBox5.Text = chDis.MP;
+            textBox6.Text = chDis.ATK.ToString();
+            textBox7.Text = chDis.MATK.ToString();
+            textBox8.Text = chDis.Critical.ToString();
+            textBox9.Text = chDis.DEF.ToString();
+            textBox10.Text = chDis.MDEF.ToString();
+            textBox11.Text = chDis.STR.ToString();
+            textBox12.Text = chDis.INT.ToString();
+            textBox13.Text = chDis.VIT.ToString();
+            textBox14.Text = chDis.AGI.ToString();
+            textBox15.Text = chDis.DEX.ToString();
+            textBox16.Text = chDis.LUK.ToString();
+            textBox17.Text = chDis.ASPD.ToString();
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

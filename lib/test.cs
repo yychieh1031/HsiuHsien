@@ -41,7 +41,7 @@ namespace lib
             Mns.DEF = 5;
             Mns.MDEF = 1;
             Mns.ASPD = 1;
-            Mns.re_EXP = "0";
+            Mns.re_EXP = "10";
             Mns.re_Mon = "0";
 
             return Mns;

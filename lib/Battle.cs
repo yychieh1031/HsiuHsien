@@ -18,20 +18,20 @@ namespace lib
                     mns_ASPD = i.ASPD;
                 }
             }
-
+            // Character Attack First
             if(btrpt.Ch_Dtl.ASPD >= mns_ASPD){
                 while(Int32.Parse(btrpt.Ch_Dtl.HP) > 0 && single == 0){
                     btrpt.Mns_Dtl[0] = ChAttMns(btrpt.Ch_Dtl, btrpt.Mns_Dtl[0], ref attmeg);
                     foreach(var mns in btrpt.Mns_Dtl){
                         //btrpt.Ch_Dtl = MnsAttCh(btrpt.Mns_Dtl[0], btrpt.Ch_Dtl, ref attmeg);
                         if(Int32.Parse(mns.HP)<=0){
-                            single = 1;
+                            single += 1;
                             break;
                         };
                         btrpt.Ch_Dtl = MnsAttCh(mns, btrpt.Ch_Dtl, ref attmeg);
                     }
                 }
-            }else{
+            }else{ // Moster Attack First
                 while(Int32.Parse(btrpt.Ch_Dtl.HP) > 0 && single == 0){
                     btrpt.Ch_Dtl = MnsAttCh(btrpt.Mns_Dtl[0], btrpt.Ch_Dtl, ref attmeg);
                     foreach(var mns in btrpt.Mns_Dtl){
@@ -44,6 +44,8 @@ namespace lib
                 }
             }
             if(Int32.Parse(btrpt.Ch_Dtl.HP) > Int32.Parse(btrpt.Mns_Dtl[0].HP)){
+                btrpt.Ch_Dtl.EXP = (Convert.ToInt32(btrpt.Ch_Dtl.EXP) + Convert.ToInt32(btrpt.Mns_Dtl[0].re_EXP)).ToString();
+                Ch_Sts.update(btrpt.Ch_Dtl);
                 return "You Win !!";
             }else if(Int32.Parse(btrpt.Ch_Dtl.HP) < Int32.Parse(btrpt.Mns_Dtl[0].HP)){
                 return "You Lose !!";
@@ -62,7 +64,7 @@ namespace lib
             damage = ch.ATK + rnd.Next(ch.Critical) - rnd.Next(mns.DEF);
             mnsHP -= damage;
             mns.HP = mnsHP.ToString();
-            string attmeg = string.Format("{0} deal {1} damage to {2}", ch.Ch_Nm, damage, mns.Mns_Nm);
+            string attmeg = string.Format("{0} deal {1} damage to {2}, {2} HP {3}", ch.Ch_Nm, damage, mns.Mns_Nm, mns.HP);
             message.Add(attmeg);
             return mns;
         }
@@ -77,7 +79,7 @@ namespace lib
             damage = mns.ATK + rnd.Next(mns.Critical) - rnd.Next(ch.DEF);
             chHP -= damage;
             ch.HP = chHP.ToString();
-            string attmeg = string.Format("{0} deal {1} damage to {2}", mns.Mns_Nm, damage, ch.Ch_Nm);
+            string attmeg = string.Format("{0} deal {1} damage to {2}, {2} HP {3}", mns.Mns_Nm, damage, ch.Ch_Nm, ch.HP);
             message.Add(attmeg);
             return ch;
         }

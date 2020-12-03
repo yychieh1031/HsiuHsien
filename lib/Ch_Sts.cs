@@ -43,7 +43,7 @@ namespace lib
             }
             return ch;
         }
-        public static void post()
+        public static void create()
         {
             //Character ch = new Character();
             var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
@@ -63,10 +63,10 @@ namespace lib
                         DEX, LUK, ASPD
                         )VALUES(
                         '{0}', '{1}', '{2}', '{3}', 
-                        '{4}', '{5}', '{6}', '{7}', 
-                        '{8}', '{9}', '{10}', 
-                        '{11}', '{12}', '{13}', '{14}', 
-                        '{15}', '{16}', '{17}')",
+                        '{4}', '{5}', {6}, {7}, 
+                        {8}, {9}, {10}, 
+                        {11}, {12}, {13}, {14}, 
+                        {15}, {16}, {17})",
 
                         "1", "Jason", "1", "0",
                         "100", "100", 10, 1,
@@ -84,7 +84,57 @@ namespace lib
                     }  
                 }
             }
+        }
+        public static void update(Character ch)
+        {
+            ch = check(ch);
+            //Character ch = new Character();
+            var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
+            using(connection)
+            {
+                connection.DefaultTimeout = 60;
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                var updateCmd = connection.CreateCommand();
+                updateCmd.CommandText = String.Format(
+                    @"UPDATE Ch_Dtl SET Lv = '{0}', EXP = '{1}' WHERE Ch_No = {2}", ch.Lv, ch.EXP, ch.Ch_No);
 
+                    updateCmd.ExecuteNonQuery();
+
+                    try{
+                        transaction.Commit();
+                    }
+                    catch(Exception ex){
+                        //Console.WriteLine("{0}", ex.ToString());
+                    }  
+                }
+            }
+        }
+        private static Character check(Character ch)
+        {
+            var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
+            var nextEXP = String.Empty;
+            using(connection)
+            {
+                connection.DefaultTimeout = 60;
+                connection.Open();
+                var selectCmd = connection.CreateCommand();
+                selectCmd.CommandText = String.Format(@"SELECT * FROM Exp_Dtl WHERE Lv = {0}", ch.Lv);
+                using(var reader = selectCmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        nextEXP = reader["EXP"].ToString();
+                    }
+                }
+                connection.Close();
+            }
+            if(Convert.ToInt32(nextEXP)<=Convert.ToInt32(ch.EXP))
+            {
+                ch.Lv = (Convert.ToInt32(ch.Lv)+1).ToString();
+            }
+            return ch;
         }
     }
 }

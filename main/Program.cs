@@ -17,7 +17,7 @@ namespace main
         static void Main()
         {
             lib.Ch_Sts.get();
-            //lib.Ch_Sts.post();
+            //lib.Ch_Sts.create();
             // Initial Setting ex. Create DB and Insert data
             string dir = ConfigurationManager.AppSettings["dir"];
             dir += "/HsiuHsien_MainDB.db";
