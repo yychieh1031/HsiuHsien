@@ -22,9 +22,7 @@ namespace main
             string dir = ConfigurationManager.AppSettings["dir"];
             dir += "/HsiuHsien_MainDB.db";
             if(!File.Exists(dir)){
-                lib.TableCreate.Ch_Dtl_Table();
-                lib.TableCreate.Mns_Dtl_Table();
-                lib.TableCreate.Exp_Dtl_Table();
+                lib.TableCreate.create();
                 lib.ExpData.post();
             }
             // Application Run

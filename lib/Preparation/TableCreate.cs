@@ -7,10 +7,17 @@ namespace lib
 {
     public class TableCreate
     {
+        static public void create()
+        {
+            Ch_Dtl_Table();
+            Mns_Dtl_Table();
+            Exp_Dtl_Table();
+            Act_Dtl_Table();
+        }
         //
         // Create Character Detail Table 
         //
-        static public void Ch_Dtl_Table()
+        static private void Ch_Dtl_Table()
         {
             var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
             using(connection){
@@ -45,7 +52,7 @@ namespace lib
         //
         // Create Monster Detail Table
         //
-        static public void Mns_Dtl_Table()
+        static private void Mns_Dtl_Table()
         {
             var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
             using(connection){
@@ -75,7 +82,7 @@ namespace lib
         //
         // Create Exp Detail Table
         //
-        static public void Exp_Dtl_Table()
+        static private void Exp_Dtl_Table()
         {
             var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
             using(connection){
@@ -86,6 +93,28 @@ namespace lib
                 createTableCmd.CommandText = String.Format(@"CREATE TABLE IF NOT EXISTS Exp_Dtl(
                                                             Lv VARCHAR(100) PRIMARY KEY,
                                                             EXP VARCHAR(255))"
+                                                            );
+                createTableCmd.ExecuteNonQuery();
+            }
+        }
+
+        //
+        // Create Account Detail Table
+        //
+        static private void Act_Dtl_Table()
+        {
+            var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
+            using(connection){
+                connection.DefaultTimeout = 60;
+                //If table not exist than create one
+                connection.Open();
+                 var createTableCmd = connection.CreateCommand();
+                createTableCmd.CommandText = String.Format(@"CREATE TABLE IF NOT EXISTS Act_Dtl(
+                                                            Act_Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                            Act_Nm VARCHAR(100),
+                                                            Act_Pw VARCHAR(100),
+                                                            Act_Mon INT,
+                                                            Act_Ch_No VARCHAR(100))"
                                                             );
                 createTableCmd.ExecuteNonQuery();
             }

@@ -27,6 +27,9 @@ namespace main
             InitializeComponent();
             UIDisplay(ch);
         }
+        public void refresh(){
+            UIDisplay(ch);
+        }
         private void button1_Click(object sender, System.EventArgs e)
         {
             //Character ch = Ch_Sts.get();
@@ -49,6 +52,29 @@ namespace main
             output.AppendText(result);
             output.AppendText(Environment.NewLine);
             UIDisplay(btrpt.Ch_Dtl);
+        }
+        private void button4_Click(object sender, System.EventArgs e)
+        {
+            Random rnd = new Random();
+            int trainingExp = 0;
+            for(int time = 1; time <= 10; time++){
+                trainingExp += rnd.Next(Convert.ToInt32(ch.Lv)*10);
+                Thread.Sleep(1000);
+                output.AppendText(String.Format("Training...{0}%",time*10));
+                output.AppendText(Environment.NewLine);
+            }
+            output.AppendText("Training Done");
+            output.AppendText(Environment.NewLine);
+            output.AppendText(String.Format("You get {0} EXP", trainingExp));
+            output.AppendText(Environment.NewLine);
+            btrpt.Ch_Dtl.EXP = (Convert.ToInt32(btrpt.Ch_Dtl.EXP) + trainingExp).ToString();
+            Ch_Sts.update(btrpt.Ch_Dtl);
+            UIDisplay(btrpt.Ch_Dtl);
+        }
+        private void button5_Click(object sender, System.EventArgs e)
+        {
+            Login_Form Login = new Login_Form();
+            Login.Show();
         }
 
         private void UIDisplay(Character chDis)
