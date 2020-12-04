@@ -16,21 +16,40 @@ namespace main
     public partial class Login_Form : Form
     {
         public static Account act = new Account();
-        public Login_Form()
+        Main_Form main = new Main_Form();
+        public Login_Form(Main_Form mainform)
         {
+            main = mainform;
             InitializeComponent();
-            TableCreate.create();
+        }
+        private void Login_Form_Activated(object sender, System.EventArgs e)
+        {
+            main.Enabled = false;
+        }
+        private void Login_Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            main = (Main_Form)this.Owner;
+            main.reload();
+            
+            main.Enabled = true;
         }
         private void button1_Click(object sender, System.EventArgs e)
         {
-            Act_Sts.create(act);
+            Boolean temp = Act_Sts.create(ref act);
+            if(temp){
+                button2_Click(sender, e);
+            }
+            label3.Text = "UserName already existed";
+            label3.Visible = true;
         }
         private void button2_Click(object sender, System.EventArgs e)
         {
-            if(Act_Sts.validate(act)){
-                Main_Form.ch.Lv = "1";
+            if(Act_Sts.validate(ref act)){
+                main.act = act;
                 this.Close();
             }
+            label3.Text = "UserName or Password incorrect";
+            label3.Visible = true;
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

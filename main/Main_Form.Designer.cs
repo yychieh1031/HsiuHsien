@@ -287,8 +287,9 @@ namespace main
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 23);
             this.button10.TabIndex = 26;
-            this.button10.Text = "button10";
+            this.button10.Text = "Create";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // listBox1
             // 
@@ -456,10 +457,13 @@ namespace main
             this.label17.Size = new System.Drawing.Size(39, 12);
             this.label17.TabIndex = 44;
             this.label17.Text = "Aspd";
-
+            //
+            // Main_Form
+            //
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Load += new System.EventHandler(this.Main_Form_Load);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);

@@ -15,33 +15,31 @@ namespace main
 {
     public partial class Main_Form : Form
     {
-        
-        public static Character ch = Ch_Sts.get();
+        public Account act = new Account();
+        public static Character ch = new Character();
         BattleReport btrpt = new BattleReport(){
             Ch_Dtl = ch,
             Mns_Dtl = new List<Monster>(),
             message = new List<string>()
         };
+
         public Main_Form()
         {
             InitializeComponent();
-            UIDisplay(ch);
         }
-        public void refresh(){
-            UIDisplay(ch);
+
+        private void Main_Form_Load(object sender, System.EventArgs e)
+        {
+            Login_Form login = new Login_Form(this);
+            login.Owner = this;
+            login.Show();
         }
+
         private void button1_Click(object sender, System.EventArgs e)
         {
-            //Character ch = Ch_Sts.get();
             Monster mns = test.Mns_testValue();
             List<Monster> MnsList = new List<Monster>();
             MnsList.Add(mns);
-            // BattleReport btrpt = new BattleReport(){
-            //     Ch_Dtl = ch,
-            //     Mns_Dtl = MnsList,
-            //     message = new List<string>()
-            // };
-            //string result = Battle.StartFight(ch, mns);
             btrpt.Mns_Dtl = MnsList; // 12.02
             string result = Battle.StartFight(ref btrpt);
             foreach(string meg in btrpt.message){
@@ -53,6 +51,10 @@ namespace main
             output.AppendText(Environment.NewLine);
             UIDisplay(btrpt.Ch_Dtl);
         }
+
+        //
+        // Training
+        //
         private void button4_Click(object sender, System.EventArgs e)
         {
             Random rnd = new Random();
@@ -71,10 +73,85 @@ namespace main
             Ch_Sts.update(btrpt.Ch_Dtl);
             UIDisplay(btrpt.Ch_Dtl);
         }
+
         private void button5_Click(object sender, System.EventArgs e)
         {
-            Login_Form Login = new Login_Form();
-            Login.Show();
+            act.Act_Mon = (Convert.ToInt32(act.Act_Mon)+1).ToString();
+        }
+        private void button10_Click(object sender, System.EventArgs e)
+        {
+            Ch_Sts.create(ch, ref act);
+            #region textbox/button disable
+            textBox2.Enabled = true;
+            textBox3.Enabled = true;
+            textBox4.Enabled = true;
+            textBox5.Enabled = true;
+            textBox6.Enabled = true;
+            textBox7.Enabled = true;
+            textBox8.Enabled = true;
+            textBox9.Enabled = true;
+            textBox10.Enabled = true;
+            textBox11.Enabled = true;
+            textBox12.Enabled = true;
+            textBox13.Enabled = true;
+            textBox14.Enabled = true;
+            textBox15.Enabled = true;
+            textBox16.Enabled = true;
+            textBox17.Enabled = true;
+            button1.Enabled = true;
+            button2.Enabled = true;
+            button3.Enabled = true;
+            button4.Enabled = true;
+            button5.Enabled = true;
+            button6.Enabled = true;
+            button7.Enabled = true;
+            button8.Enabled = true;
+            button9.Enabled = true;
+            #endregion
+            ch = Ch_Sts.get(act.Act_Ch_No);
+            btrpt.Ch_Dtl = ch;
+            UIDisplay(ch);
+            button10.Enabled = false;
+        }
+        public void reload(){
+            if(!String.IsNullOrEmpty(act.Act_Ch_No)){
+                button10.Enabled = false;
+            }
+            if(String.IsNullOrEmpty(act.Act_Ch_No)){
+                #region textbox/button disable
+                textBox2.Enabled = false;
+                textBox3.Enabled = false;
+                textBox4.Enabled = false;
+                textBox5.Enabled = false;
+                textBox6.Enabled = false;
+                textBox7.Enabled = false;
+                textBox8.Enabled = false;
+                textBox9.Enabled = false;
+                textBox10.Enabled = false;
+                textBox11.Enabled = false;
+                textBox12.Enabled = false;
+                textBox13.Enabled = false;
+                textBox14.Enabled = false;
+                textBox15.Enabled = false;
+                textBox16.Enabled = false;
+                textBox17.Enabled = false;
+                button1.Enabled = false;
+                button2.Enabled = false;
+                button3.Enabled = false;
+                button4.Enabled = false;
+                button5.Enabled = false;
+                button6.Enabled = false;
+                button7.Enabled = false;
+                button8.Enabled = false;
+                button9.Enabled = false;
+                #endregion
+                output.AppendText("Please Insert Character Name..");
+                output.AppendText(Environment.NewLine);
+            }else{
+                ch = Ch_Sts.get(act.Act_Ch_No);
+                btrpt.Ch_Dtl = ch;
+            }
+            UIDisplay(ch);
         }
 
         private void UIDisplay(Character chDis)
