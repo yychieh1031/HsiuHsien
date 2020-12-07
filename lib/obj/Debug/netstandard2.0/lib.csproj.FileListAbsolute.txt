@@ -1,0 +1,12 @@
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\bin\Debug\netstandard2.0\lib.deps.json
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\bin\Debug\netstandard2.0\lib.dll
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\bin\Debug\netstandard2.0\lib.pdb
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\bin\Debug\netstandard2.0\Entity.dll
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\bin\Debug\netstandard2.0\Entity.pdb
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\obj\Debug\netstandard2.0\lib.csprojAssemblyReference.cache
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\obj\Debug\netstandard2.0\lib.AssemblyInfoInputs.cache
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\obj\Debug\netstandard2.0\lib.AssemblyInfo.cs
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\obj\Debug\netstandard2.0\lib.csproj.CoreCompileInputs.cache
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\obj\Debug\netstandard2.0\lib.csproj.CopyComplete
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\obj\Debug\netstandard2.0\lib.dll
+C:\Users\Hung Ming Liang\Desktop\C#test\HsiuHsien\lib\obj\Debug\netstandard2.0\lib.pdb
