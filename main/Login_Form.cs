@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,12 @@ namespace main
         private void Login_Form_Activated(object sender, System.EventArgs e)
         {
             main.Enabled = false;
+        }
+        private void Login_Form_FormClosing(object sender, FormClosingEventArgs e) {
+            if (!new StackTrace().GetFrames().Any(x => x.GetMethod().Name == "Close"))
+            {
+                Application.Exit();
+            }
         }
         private void Login_Form_FormClosed(object sender, FormClosedEventArgs e)
         {

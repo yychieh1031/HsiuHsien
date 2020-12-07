@@ -110,6 +110,7 @@ namespace main
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(200, 200);
             this.Activated += new System.EventHandler(this.Login_Form_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_Form_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_Form_FormClosed);
             this.TopMost = true;
             this.Controls.Add(this.label1);
