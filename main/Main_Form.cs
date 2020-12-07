@@ -18,6 +18,7 @@ namespace main
         public Account act = new Account();
         public static Character ch = new Character();
         BattleReport btrpt = new BattleReport(){
+            Acc_Dtl = new Account(),
             Ch_Dtl = ch,
             Mns_Dtl = new List<Monster>(),
             message = new List<string>()
@@ -34,7 +35,10 @@ namespace main
             login.Owner = this;
             login.Show();
         }
-
+        
+        //
+        // Attack
+        //
         private void button1_Click(object sender, System.EventArgs e)
         {
             Monster mns = test.Mns_testValue();
@@ -49,7 +53,7 @@ namespace main
             }
             output.AppendText(result);
             output.AppendText(Environment.NewLine);
-            UIDisplay(btrpt.Ch_Dtl);
+            UIDisplay(btrpt);
         }
 
         //
@@ -71,53 +75,78 @@ namespace main
             output.AppendText(Environment.NewLine);
             btrpt.Ch_Dtl.EXP = (Convert.ToInt32(btrpt.Ch_Dtl.EXP) + trainingExp).ToString();
             Ch_Sts.update(btrpt.Ch_Dtl);
-            UIDisplay(btrpt.Ch_Dtl);
+            UIDisplay(btrpt);
         }
-
+        
+        //
+        // Heal
+        //
         private void button5_Click(object sender, System.EventArgs e)
         {
-            act.Act_Mon = (Convert.ToInt32(act.Act_Mon)+1).ToString();
+            Random rnd = new Random();
+            int healHp = 0;
+            for(int time = 2; time <= 10; time+=2){
+                healHp += rnd.Next(30)+10;
+                Thread.Sleep(1000);
+                output.AppendText(String.Format("Healing...{0}%",time*10));
+                output.AppendText(Environment.NewLine);
+            }
+            btrpt.Ch_Dtl.HP = (Convert.ToInt32(btrpt.Ch_Dtl.HP)+healHp) > 100 ? "100" : (Convert.ToInt32(btrpt.Ch_Dtl.HP)+healHp).ToString();
+            output.AppendText("Successed Heal");
+            output.AppendText(Environment.NewLine);
+            UIDisplay(btrpt);
         }
+
+        //
+        // Create
+        //
         private void button10_Click(object sender, System.EventArgs e)
         {
-            Ch_Sts.create(ch, ref act);
-            #region textbox/button disable
-            textBox2.Enabled = true;
-            textBox3.Enabled = true;
-            textBox4.Enabled = true;
-            textBox5.Enabled = true;
-            textBox6.Enabled = true;
-            textBox7.Enabled = true;
-            textBox8.Enabled = true;
-            textBox9.Enabled = true;
-            textBox10.Enabled = true;
-            textBox11.Enabled = true;
-            textBox12.Enabled = true;
-            textBox13.Enabled = true;
-            textBox14.Enabled = true;
-            textBox15.Enabled = true;
-            textBox16.Enabled = true;
-            textBox17.Enabled = true;
-            button1.Enabled = true;
-            button2.Enabled = true;
-            button3.Enabled = true;
-            button4.Enabled = true;
-            button5.Enabled = true;
-            button6.Enabled = true;
-            button7.Enabled = true;
-            button8.Enabled = true;
-            button9.Enabled = true;
-            #endregion
-            ch = Ch_Sts.get(act.Act_Ch_No);
-            btrpt.Ch_Dtl = ch;
-            UIDisplay(ch);
-            button10.Enabled = false;
+            // Create option
+            if(String.IsNullOrEmpty(act.Act_Ch_No))
+            {
+                Ch_Sts.create(ch, ref act);
+                #region textbox/button enable
+                textBox2.Enabled = true;
+                textBox3.Enabled = true;
+                textBox4.Enabled = true;
+                textBox5.Enabled = true;
+                textBox6.Enabled = true;
+                textBox7.Enabled = true;
+                textBox8.Enabled = true;
+                textBox9.Enabled = true;
+                textBox10.Enabled = true;
+                textBox11.Enabled = true;
+                textBox12.Enabled = true;
+                textBox13.Enabled = true;
+                textBox14.Enabled = true;
+                textBox15.Enabled = true;
+                textBox16.Enabled = true;
+                textBox17.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = true;
+                button5.Enabled = true;
+                button6.Enabled = true;
+                button7.Enabled = true;
+                button8.Enabled = true;
+                button9.Enabled = true;
+                #endregion
+                ch = Ch_Sts.get(act.Act_Ch_No);
+                btrpt.Ch_Dtl = ch;
+                UIDisplay(btrpt);
+                button10.Text = "Logout";
+            }else{// Logout option
+                btrpt.Ch_Dtl.Ch_Nm = "";
+                Login_Form login = new Login_Form(this);
+                login.Owner = this;
+                login.Show();
+            }
         }
         public void reload(){
-            if(!String.IsNullOrEmpty(act.Act_Ch_No)){
-                button10.Enabled = false;
-            }
             if(String.IsNullOrEmpty(act.Act_Ch_No)){
+                button10.Text = "Create";
                 #region textbox/button disable
                 textBox2.Enabled = false;
                 textBox3.Enabled = false;
@@ -148,31 +177,36 @@ namespace main
                 output.AppendText("Please Insert Character Name..");
                 output.AppendText(Environment.NewLine);
             }else{
+                button10.Text = "Logout";
                 ch = Ch_Sts.get(act.Act_Ch_No);
                 btrpt.Ch_Dtl = ch;
+                btrpt.Acc_Dtl = act;
             }
-            UIDisplay(ch);
+            UIDisplay(btrpt);
         }
 
-        private void UIDisplay(Character chDis)
+        private void UIDisplay(BattleReport btrptDis)
         {
-            textBox1.Text = chDis.Ch_Nm;
-            textBox2.Text = chDis.Lv;
-            textBox3.Text = chDis.EXP;
-            textBox4.Text = chDis.HP;
-            textBox5.Text = chDis.MP;
-            textBox6.Text = chDis.ATK.ToString();
-            textBox7.Text = chDis.MATK.ToString();
-            textBox8.Text = chDis.Critical.ToString();
-            textBox9.Text = chDis.DEF.ToString();
-            textBox10.Text = chDis.MDEF.ToString();
-            textBox11.Text = chDis.STR.ToString();
-            textBox12.Text = chDis.INT.ToString();
-            textBox13.Text = chDis.VIT.ToString();
-            textBox14.Text = chDis.AGI.ToString();
-            textBox15.Text = chDis.DEX.ToString();
-            textBox16.Text = chDis.LUK.ToString();
-            textBox17.Text = chDis.ASPD.ToString();
+            #region Character Detail
+            textBox1.Text = btrptDis.Ch_Dtl.Ch_Nm;
+            textBox2.Text = btrptDis.Ch_Dtl.Lv;
+            textBox3.Text = btrptDis.Ch_Dtl.EXP;
+            textBox4.Text = btrptDis.Ch_Dtl.HP;
+            textBox5.Text = btrptDis.Ch_Dtl.MP;
+            textBox6.Text = btrptDis.Ch_Dtl.ATK.ToString();
+            textBox7.Text = btrptDis.Ch_Dtl.MATK.ToString();
+            textBox8.Text = btrptDis.Ch_Dtl.Critical.ToString();
+            textBox9.Text = btrptDis.Ch_Dtl.DEF.ToString();
+            textBox10.Text = btrptDis.Ch_Dtl.MDEF.ToString();
+            textBox11.Text = btrptDis.Ch_Dtl.STR.ToString();
+            textBox12.Text = btrptDis.Ch_Dtl.INT.ToString();
+            textBox13.Text = btrptDis.Ch_Dtl.VIT.ToString();
+            textBox14.Text = btrptDis.Ch_Dtl.AGI.ToString();
+            textBox15.Text = btrptDis.Ch_Dtl.DEX.ToString();
+            textBox16.Text = btrptDis.Ch_Dtl.LUK.ToString();
+            textBox17.Text = btrptDis.Ch_Dtl.ASPD.ToString();
+            #endregion
+            textBox18.Text = btrptDis.Acc_Dtl.Act_Mon;
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

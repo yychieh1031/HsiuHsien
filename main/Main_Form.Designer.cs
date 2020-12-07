@@ -74,6 +74,8 @@ namespace main
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox18 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1_Name
@@ -241,7 +243,7 @@ namespace main
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 21;
-            this.button5.Text = "button5";
+            this.button5.Text = "Heal";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -457,6 +459,22 @@ namespace main
             this.label17.Size = new System.Drawing.Size(39, 12);
             this.label17.TabIndex = 44;
             this.label17.Text = "Aspd";
+            // 
+            // label17_Money
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(10, 418);
+            this.label18.Name = "label17";
+            this.label18.Size = new System.Drawing.Size(39, 12);
+            this.label18.TabIndex = 44;
+            this.label18.Text = "Money";
+            // 
+            // textBox17_Money
+            // 
+            this.textBox18.Location = new System.Drawing.Point(60, 415);
+            this.textBox18.Name = "textBox17";
+            this.textBox18.Size = new System.Drawing.Size(100, 22);
+            this.textBox18.TabIndex = 45;
             //
             // Main_Form
             //
@@ -464,6 +482,8 @@ namespace main
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Load += new System.EventHandler(this.Main_Form_Load);
+            this.Controls.Add(this.textBox18);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -560,6 +580,8 @@ namespace main
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBox18;
         #endregion
     }
 }

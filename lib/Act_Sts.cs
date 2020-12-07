@@ -11,7 +11,7 @@ namespace lib
         //
         public static Boolean validate(ref Account act)
         {
-            string userId = String.Empty, userPw = String.Empty, chNo = String.Empty;
+            string userId = String.Empty, userPw = String.Empty, userMon = String.Empty, chNo = String.Empty;
             var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
             using(connection)
             {
@@ -25,12 +25,14 @@ namespace lib
                     {
                         userId = reader["Act_Id"].ToString();
                         userPw = reader["Act_Pw"].ToString();
+                        userMon = reader["Act_Mon"].ToString();
                         chNo = reader["Act_Ch_No"].ToString();
                     }
                 }
             }
             if(act.Act_Pw == userPw){
                 act.Act_Id = userId;
+                act.Act_Mon = userMon;
                 act.Act_Ch_No = chNo;
                 return true;
             }else{
