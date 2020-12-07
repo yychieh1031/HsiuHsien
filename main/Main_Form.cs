@@ -34,7 +34,10 @@ namespace main
             login.Owner = this;
             login.Show();
         }
-
+        
+        //
+        // Attack
+        //
         private void button1_Click(object sender, System.EventArgs e)
         {
             Monster mns = test.Mns_testValue();
@@ -78,6 +81,10 @@ namespace main
         {
             act.Act_Mon = (Convert.ToInt32(act.Act_Mon)+1).ToString();
         }
+
+        //
+        // Create
+        //
         private void button10_Click(object sender, System.EventArgs e)
         {
             Ch_Sts.create(ch, ref act);
