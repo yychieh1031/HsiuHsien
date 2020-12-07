@@ -26,7 +26,7 @@ namespace lib
                     damage=earth(enemyType,myAtk,enemyDef);
                     break;
                 defalut:
-                    damage=enemyDef-myAtk;
+                    damage=myAtk-enemyDef;
                     break;
 
 
