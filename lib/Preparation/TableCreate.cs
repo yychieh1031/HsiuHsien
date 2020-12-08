@@ -1,7 +1,4 @@
 using System;
-using System.Configuration;
-using System.IO;
-using Microsoft.Data.Sqlite;
 
 namespace lib
 {
@@ -13,6 +10,8 @@ namespace lib
             Mns_Dtl_Table();
             Exp_Dtl_Table();
             Act_Dtl_Table();
+            Ro_Dtl_Table();
+            Ro_Rou_Table();
         }
         //
         // Create Character Detail Table 
@@ -28,6 +27,7 @@ namespace lib
                 createTableCmd.CommandText = String.Format(@"CREATE TABLE IF NOT EXISTS Ch_Dtl(
                                                             Ch_No VARCHAR(255) PRIMARY KEY,
                                                             Ch_Nm VARCHAR(100),
+                                                            Ch_Type INTEGER,
                                                             Lv VARCHAR(100),
                                                             EXP VARCHAR(255),
                                                             HP VARCHAR(255),
@@ -63,6 +63,7 @@ namespace lib
                 createTableCmd.CommandText = String.Format(@"CREATE TABLE IF NOT EXISTS Mns_Dtl(
                                                             Mns_No VARCHAR(255) PRIMARY KEY,
                                                             Mns_Nm VARCHAR(100),
+                                                            Mns_Type INTEGER,
                                                             Lv VARCHAR(100),
                                                             HP VARCHAR(255),
                                                             MP VARCHAR(255),
@@ -115,6 +116,42 @@ namespace lib
                                                             Act_Pw VARCHAR(100),
                                                             Act_Mon INT,
                                                             Act_Ch_No VARCHAR(100))"
+                                                            );
+                createTableCmd.ExecuteNonQuery();
+            }
+        }
+        static private void Ro_Dtl_Table()
+        {
+            var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
+            using(connection){
+                connection.DefaultTimeout = 60;
+                //If table not exist than create one
+                connection.Open();
+                 var createTableCmd = connection.CreateCommand();
+                createTableCmd.CommandText = String.Format(@"CREATE TABLE IF NOT EXISTS Ro_Dtl(
+                                                            Ro_No VARCHAR(100) PRIMARY KEY,
+                                                            Ro_Lv VARCHAR(100),
+                                                            Ro_Nm VARCHAR(100),
+                                                            Ro_Type INT,
+                                                            Ro_Bos_No VARCHAR(100),
+                                                            Mns_No VARCHAR(100),
+                                                            Pre_Ro_No VARCHAR(100),
+                                                            Child_Ro_No VARCHAR(100))"
+                                                            );
+                createTableCmd.ExecuteNonQuery();
+            }
+        }
+        static private void Ro_Rou_Table()
+        {
+            var connection = SqliteHelper.DBContext("HsiuHsien_MainDB.db");
+            using(connection){
+                connection.DefaultTimeout = 60;
+                //If table not exist than create one
+                connection.Open();
+                 var createTableCmd = connection.CreateCommand();
+                createTableCmd.CommandText = String.Format(@"CREATE TABLE IF NOT EXISTS Ro_Rou(
+                                                            Ro_No VARCHAR(100),
+                                                            Ch_No VARCHAR(100))"
                                                             );
                 createTableCmd.ExecuteNonQuery();
             }

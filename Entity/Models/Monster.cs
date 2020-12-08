@@ -6,6 +6,7 @@ namespace HsiuHsien.Entity
     {
         public string Mns_No { get; set; }
         public string Mns_Nm { get; set; }
+        public int Mns_Type {get; set; }
         public string Lv { get; set; }
         public string HP { get; set; }
         public string MP { get; set; }

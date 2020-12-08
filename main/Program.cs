@@ -22,6 +22,7 @@ namespace main
             if(!File.Exists(dir)){
                 lib.TableCreate.create();
                 lib.ExpData.post();
+                lib.RoomData.post();
             }
             // Application Run
             Application.SetHighDpiMode(HighDpiMode.SystemAware);

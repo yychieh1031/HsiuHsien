@@ -77,7 +77,7 @@ namespace main
             Ch_Sts.update(btrpt.Ch_Dtl);
             UIDisplay(btrpt);
         }
-        
+
         //
         // Heal
         //
@@ -98,11 +98,11 @@ namespace main
         }
 
         //
-        // Create
+        // Create Character
         //
         private void button10_Click(object sender, System.EventArgs e)
         {
-            // Create option
+            // Create Character option
             if(String.IsNullOrEmpty(act.Act_Ch_No))
             {
                 Ch_Sts.create(ch, ref act);
@@ -135,8 +135,14 @@ namespace main
                 #endregion
                 ch = Ch_Sts.get(act.Act_Ch_No);
                 btrpt.Ch_Dtl = ch;
+                // Initial Room set
+                Ro_Rou.post(btrpt);
                 UIDisplay(btrpt);
                 button10.Text = "Logout";
+                Room room = new Room();
+                room = Ro_Sts.get(btrpt);
+                output.AppendText("You are in " + room.Ro_Nm);
+                output.AppendText(Environment.NewLine);
             }else{// Logout option
                 btrpt.Ch_Dtl.Ch_Nm = "";
                 Login_Form login = new Login_Form(this);
@@ -181,6 +187,11 @@ namespace main
                 ch = Ch_Sts.get(act.Act_Ch_No);
                 btrpt.Ch_Dtl = ch;
                 btrpt.Acc_Dtl = act;
+                
+                Room room = new Room();
+                room = Ro_Sts.get(btrpt);
+                output.AppendText("You are in " + room.Ro_Nm);
+                output.AppendText(Environment.NewLine);
             }
             UIDisplay(btrpt);
         }

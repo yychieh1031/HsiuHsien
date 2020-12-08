@@ -1,40 +1,25 @@
+using System;
 namespace lib 
 {
     public class calDamage
     {   
         // 0 無 1金 2木 3水 4火 5土
-        public static int atkToEnemy(int myType, int enemyType, int myAtk, int enemyDef){
-
-            int damage=enemyDef-myAtk;
-
+        public static int atkToEnemy( int myType, int enemyType, int myAtk, int enemyDef){
+            int damage = 0;
             switch(myType){
-
                 case 1:
-                    damage=gold(enemyType,myAtk,enemyDef);
-                    break;
+                    return damage = gold( enemyType, myAtk, enemyDef);
                 case 2:
-                    damage=wood(enemyType,myAtk,enemyDef);
-                    break;
-
+                    return damage = wood( enemyType, myAtk, enemyDef);
                 case 3:
-                    damage=water(enemyType,myAtk,enemyDef);
-                    break;
+                    return damage = water( enemyType, myAtk, enemyDef);
                 case 4:
-                    damage=fire(enemyType,myAtk,enemyDef);
-                    break;
+                    return damage = fire( enemyType, myAtk, enemyDef);
                 case 5:
-                    damage=earth(enemyType,myAtk,enemyDef);
-                    break;
-                defalut:
-                    damage=enemyDef-myAtk;
-                    break;
-
-
+                    return damage = earth( enemyType, myAtk, enemyDef);
+                default:
+                    return damage = myAtk - enemyDef < 0 ? 0 : myAtk - enemyDef;
             }
-
-
-            return damage;
-
         }
 
         private static int gold(int enemyType, int myAtk, int enemyDef){

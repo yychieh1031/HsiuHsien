@@ -32,6 +32,7 @@ namespace lib
             Monster Mns = new Monster();
             Mns.Mns_No = "1";
             Mns.Mns_Nm = "Doncky";
+            Mns.Mns_Type = 0;
             Mns.Lv = "1";
             Mns.HP = "100";
             Mns.MP = "100";

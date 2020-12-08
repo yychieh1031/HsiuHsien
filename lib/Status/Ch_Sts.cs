@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using HsiuHsien.Entity;
 
 namespace lib
@@ -25,6 +24,7 @@ namespace lib
                     { 
                         ch.Ch_No = reader["Ch_No"].ToString();
                         ch.Ch_Nm = reader["Ch_Nm"].ToString();
+                        ch.Ch_Type = Convert.ToInt32(reader["Ch_Type"]);
                         ch.Lv = reader["Lv"].ToString();
                         ch.EXP = reader["EXP"].ToString();
                         ch.HP = reader["HP"].ToString();
@@ -66,6 +66,7 @@ namespace lib
                     { 
                         ch.Ch_No = reader["Ch_No"].ToString();
                         ch.Ch_Nm = reader["Ch_Nm"].ToString();
+                        ch.Ch_Type = Convert.ToInt32(reader["Ch_Type"]);
                         ch.Lv = reader["Lv"].ToString();
                         ch.EXP = reader["EXP"].ToString();
                         ch.HP = reader["HP"].ToString();
@@ -114,19 +115,19 @@ namespace lib
                     var insertCmd = connection.CreateCommand();
                     insertCmd.CommandText = String.Format(
                         @"INSERT INTO Ch_Dtl (
-                            Ch_No, Ch_Nm, Lv, EXP, 
+                            Ch_No, Ch_Nm, Ch_Type, Lv, EXP, 
                             HP, MP, ATK, MATK,
                             Critical, DEF, MDEF,
                             STR, INT, VIT, AGI,
                             DEX, LUK, ASPD
                             )VALUES(
-                            '{0}', '{1}', '{2}', '{3}', 
-                            '{4}', '{5}', {6}, {7}, 
-                            {8}, {9}, {10}, 
-                            {11}, {12}, {13}, {14}, 
-                            {15}, {16}, {17})",
+                            '{0}', '{1}', {2}, '{3}', '{4}',
+                            '{5}', '{6}', {7}, {8},
+                            {9}, {10}, {11},
+                            {12}, {13}, {14}, {15},
+                            {16}, {17}, {18})",
 
-                            lastNo, ch.Ch_Nm, "1", "0",
+                            lastNo, ch.Ch_Nm, 0, "1", "0",
                             "100", "100", 10, 1,
                             5, 1, 1,
                             1, 1, 1, 1,

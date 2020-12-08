@@ -60,11 +60,12 @@ namespace lib
         // Character Attack Monster
         //
         static private Monster ChAttMns(Character ch, Monster mns, ref List<string> message){
-            int damage = 0;
+            int damage = 0, attAtk = 0;
             Random rnd = new Random();
             int mnsHP = Int32.Parse(mns.HP);
+            attAtk = calDamage.atkToEnemy(ch.Ch_Type, mns.Mns_Type, ch.MATK, mns.MDEF);
             damage = ch.ATK + rnd.Next(ch.Critical) - rnd.Next(mns.DEF);
-            mnsHP -= damage;
+            mnsHP -= (damage + attAtk);
             mns.HP = mnsHP.ToString();
             string attmeg = string.Format("{0} deal {1} damage to {2}, {2} HP {3}", ch.Ch_Nm, damage, mns.Mns_Nm, mns.HP);
             message.Add(attmeg);
