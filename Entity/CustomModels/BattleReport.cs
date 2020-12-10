@@ -9,5 +9,6 @@ namespace HsiuHsien.Entity
         public Character Ch_Dtl { get; set; }
         public List<Monster> Mns_Dtl { get; set; }
         public List<string> message { get; set; }
+        public Room room { get; set; }
     }
 }

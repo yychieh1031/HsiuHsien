@@ -5,6 +5,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.0"/>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0"/>
+    <PackageReference Include="CsvHelper" Version="18.0.0"/>
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>

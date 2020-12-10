@@ -1,5 +1,3 @@
-using System;
-
 namespace HsiuHsien.Entity
 {
     public class Monster

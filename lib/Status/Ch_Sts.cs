@@ -5,6 +5,7 @@ namespace lib
 {
     public class Ch_Sts
     {
+        #region temp
         //
         // Get Character detail
         //
@@ -46,6 +47,7 @@ namespace lib
             }
             return ch;
         }
+        #endregion
 
         //
         // Get Character detail

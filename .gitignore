@@ -12,9 +12,9 @@ project.lock.json
 *.user
 *.userosscache
 *.sln.docstates
+*.db
 
 # Build results
-App_Data/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/

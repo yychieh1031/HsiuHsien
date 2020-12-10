@@ -27,5 +27,11 @@ namespace lib
 
             return connection;
         }
+        static public StreamReader CsvContext(String csvName)
+        {
+            string dir = ConfigurationManager.AppSettings["dir"] + "/" + csvName;
+            var connection = new StreamReader(dir);
+            return connection;
+        }
     }   
 }

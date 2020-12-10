@@ -21,7 +21,8 @@ namespace main
             Acc_Dtl = new Account(),
             Ch_Dtl = ch,
             Mns_Dtl = new List<Monster>(),
-            message = new List<string>()
+            message = new List<string>(),
+            room = new Room()
         };
 
         public Main_Form()
@@ -41,10 +42,11 @@ namespace main
         //
         private void button1_Click(object sender, System.EventArgs e)
         {
-            Monster mns = test.Mns_testValue();
-            List<Monster> MnsList = new List<Monster>();
-            MnsList.Add(mns);
-            btrpt.Mns_Dtl = MnsList; // 12.02
+            // Monster mns = test.Mns_testValue();
+            // List<Monster> MnsList = new List<Monster>();
+            // MnsList.Add(mns);
+            // btrpt.Mns_Dtl = MnsList;
+            btrpt = Mns_Sts.get(btrpt);
             string result = Battle.StartFight(ref btrpt);
             foreach(string meg in btrpt.message){
                 output.AppendText(meg);
@@ -135,13 +137,12 @@ namespace main
                 #endregion
                 ch = Ch_Sts.get(act.Act_Ch_No);
                 btrpt.Ch_Dtl = ch;
-                // Initial Room set
-                Ro_Rou.post(btrpt);
                 UIDisplay(btrpt);
                 button10.Text = "Logout";
-                Room room = new Room();
-                room = Ro_Sts.get(btrpt);
-                output.AppendText("You are in " + room.Ro_Nm);
+                // Initial Room set
+                Ro_Rou.post(btrpt);
+                btrpt.room = Ro_Sts.get(btrpt);
+                output.AppendText("You are in " + btrpt.room.Ro_Nm);
                 output.AppendText(Environment.NewLine);
             }else{// Logout option
                 btrpt.Ch_Dtl.Ch_Nm = "";
@@ -188,9 +189,8 @@ namespace main
                 btrpt.Ch_Dtl = ch;
                 btrpt.Acc_Dtl = act;
                 
-                Room room = new Room();
-                room = Ro_Sts.get(btrpt);
-                output.AppendText("You are in " + room.Ro_Nm);
+                btrpt.room = Ro_Sts.get(btrpt);
+                output.AppendText("You are in " + btrpt.room.Ro_Nm);
                 output.AppendText(Environment.NewLine);
             }
             UIDisplay(btrpt);

@@ -23,6 +23,7 @@ namespace main
                 lib.TableCreate.create();
                 lib.ExpData.post();
                 lib.RoomData.post();
+                lib.MonsterData.post();
             }
             // Application Run
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
